@@ -98,8 +98,6 @@ int main(void){
 			op=log(num1);
 			printf("le logarithme de %d est : %d .",num1,op);
 		break;
-			
-		case 11 : 
 		    	 		     	     
 		default : 
 		       printf("Le mode voulu introuvable ou incorrecte.");
