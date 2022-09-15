@@ -1,9 +1,9 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-void TriDecroissant(float *Z, int N){
+void TriDecroissant(int *Z, int N){
 int i,j;
-float a;
+int a;
  for(i=0;i<N;i++){
     for(j=0;j<N;j++){
         if(*(Z+i)>*(Z+j)){
@@ -13,15 +13,15 @@ float a;
         }
     }
  }
-    printf("les elements du tableau par ordre croissant sont : \n");
+    printf("les elements du tableau par ordre decroissant sont : \n");
         for(i=0;i<N;i++){
-                printf("%.2f \n",*(Z+i));
+                printf("%d \n",*(Z+i));
         }
     printf("\n");
 }
 
 //tri par selection
-void TriSelection(float *Z,int N){
+void TriSelection(int *Z,int N){
     int i,j,index;
     int tmp=0;
  for(i=0;i<N;i++){
@@ -39,14 +39,14 @@ void TriSelection(float *Z,int N){
       }}
       printf("le tableau par ordre decroissant METHODE PAR SELECTION \n");
         for(i=0;i<=N-1;i++){
-            printf("%.2f \t",*(Z+i));
+            printf("%d \t",*(Z+i));
 
         }
 
 }
         
 //Tri bulle
-void TriBulle(float *Z, int N){
+void TriBulle(int *Z, int N){
 int i,j,tmp;
 tmp=0;
 for(i=0;i<=N-1;i++){
@@ -60,12 +60,46 @@ for(i=0;i<=N-1;i++){
 }
 printf("\n le tableau par ordre decroissant METHODE A BULLE \n");
         for(j=0;j<=N-1;j++){
-            printf("%.2f \t",*(Z+j));
+            printf("%d \t",*(Z+j));
 
         }
 }   
      
-float moy(float *Z, int N){
+     //Recherche dichotomie
+    int Recherche_dichotomie(int val,int *Z, int N){
+    int debut=0;
+    int fin=N-1;
+    int milieu=(debut+fin)/2;
+    while(*(Z+milieu)!=val && fin>debut){
+        if(*(Z+milieu)>val){
+            fin=milieu-1;
+           // return milieu;
+        }
+
+        else
+           {
+            debut=milieu+1;
+           }
+           milieu=(debut+fin)/2;
+      //  return milieu;
+    }
+
+    if(*(Z+milieu)==val)
+        return milieu+1;
+    return -1;
+}
+
+//Recherche simple
+int Recherche_simple(int val,int *Z, int N){
+    int i;
+    for(i=0;i<N;i++){
+        if(val==*(Z+i))
+            return i+1;
+    }
+    return -1;
+}
+
+float moy(int *Z, int N){
 	int i;
     float S=0,M;
    // float *Z;
@@ -84,9 +118,9 @@ float moy(float *Z, int N){
 
 int main(void)
 {
-	int i,N;
-	float *Z;
-	Z = malloc (N *sizeof (float));
+	int i,N,val;
+	int *Z;
+	Z = malloc (N *sizeof (int));
 	
 	printf("entrer le nombre d'etudiants : ");
 	scanf("%d",&N);
@@ -94,7 +128,7 @@ int main(void)
 	for (i=0;i<N;i++)
 	{
 		printf("Enter la note de l'etudiant %d: ",i+1);
-		scanf("%f",Z+i);
+		scanf("%d",Z+i);
 	}
 	
 	float moyenne =  moy(Z,N);
@@ -106,9 +140,17 @@ int main(void)
 	printf("La moyenne de la classe est acceptable. \n");
 	else 
 	printf("La moyenne de la classe est exellente.\n");
+	
 	TriDecroissant(Z,N);
 	TriSelection(Z,N);
 	TriBulle(Z,N);
 	
+	printf("\ninserer la valeur a rechercher : \n");
+    scanf("%d",&val);
+	int Rd = Recherche_dichotomie(val,Z,N);
+	printf("la position de votre dichotomie est : %d\n",Rd);
+	int Rs = Recherche_simple(val,Z,N);
+	printf("la position de votre valeur est : %d\n",Rs);
+
 	return 0;
 }
