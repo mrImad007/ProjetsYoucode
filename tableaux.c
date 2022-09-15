@@ -37,7 +37,7 @@ void TriSelection(float *Z,int N){
         *(Z+index)=tmp;
              }
       }}
-      printf("le tableau par ordre croissant METHODE PAR SELECTION \n");
+      printf("le tableau par ordre decroissant METHODE PAR SELECTION \n");
         for(i=0;i<=N-1;i++){
             printf("%.2f \t",*(Z+i));
 
@@ -58,7 +58,7 @@ for(i=0;i<=N-1;i++){
             }
     }
 }
-printf("\n le tableau par ordre croissant METHODE A BULLE \n");
+printf("\n le tableau par ordre decroissant METHODE A BULLE \n");
         for(j=0;j<=N-1;j++){
             printf("%.2f \t",*(Z+j));
 
